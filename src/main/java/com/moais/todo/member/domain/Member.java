@@ -22,4 +22,8 @@ public class Member {
         this.loginInfo = loginInfo;
         this.nickname = nickname;
     }
+
+    public void login(LoginInfo loginInfo) {
+        this.loginInfo.login(loginInfo);
+    }
 }

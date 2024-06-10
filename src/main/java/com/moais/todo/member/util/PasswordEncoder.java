@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordEncoder {
     public static String encode(String rawPassword) {
-        MessageDigest md = null;
+        MessageDigest md;
 
         try {
             md = MessageDigest.getInstance("SHA-256");
@@ -23,9 +23,5 @@ public class PasswordEncoder {
         }
 
         return hexString.toString();
-    }
-
-    public static boolean matches(String rawPassword, String encodedPassword) {
-        return rawPassword.equals(encodedPassword);
     }
 }
