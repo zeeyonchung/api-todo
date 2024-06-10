@@ -4,11 +4,10 @@ import com.moais.todo.member.domain.Member;
 import com.moais.todo.member.service.MemberService;
 import com.moais.todo.member.web.dto.CreateMemberReq;
 import com.moais.todo.member.web.dto.CreateMemberRes;
+import com.moais.todo.member.web.dto.EmptyRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +20,13 @@ public class MemberController {
         Member member = req.toMember();
         Long id = memberService.join(member);
         return ResponseEntity.ok(new CreateMemberRes(id));
+    }
+
+    @DeleteMapping("/members/{id}")
+    public ResponseEntity<EmptyRes> delete(
+            @PathVariable Long id,
+            @SessionAttribute(name = "id") Long sessionId) {
+        memberService.deleteAccount(id, sessionId);
+        return ResponseEntity.ok(new EmptyRes());
     }
 }

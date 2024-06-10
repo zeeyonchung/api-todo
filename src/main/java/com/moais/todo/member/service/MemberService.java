@@ -47,4 +47,18 @@ public class MemberService {
         member.login(loginInfo);
         return member.getId();
     }
+
+    @Transactional
+    public void deleteAccount(Long id, Long sessionId) {
+        Optional<Member> foundMember = memberRepository.findById(id);
+
+        Member member = foundMember.orElseThrow(() ->
+                new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, id.toString()));
+
+        if (!member.getId().equals(sessionId)) {
+            throw new CustomException(ErrorCode.LOGIN_UNAUTHORIZED, id.toString());
+        }
+
+        member.deactivate();
+    }
 }

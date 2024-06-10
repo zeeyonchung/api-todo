@@ -1,5 +1,7 @@
 package com.moais.todo.member.domain;
 
+import com.moais.todo.error.CustomException;
+import com.moais.todo.error.ErrorCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,12 +20,24 @@ public class Member {
 
     private String nickname;
 
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
+
     public Member(LoginInfo loginInfo, String nickname) {
         this.loginInfo = loginInfo;
         this.nickname = nickname;
+        this.status = MemberStatus.ACTIVATED;
     }
 
     public void login(LoginInfo loginInfo) {
+        if (this.status != MemberStatus.ACTIVATED) {
+            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginInfo.getMemberId());
+        }
+
         this.loginInfo.login(loginInfo);
+    }
+
+    public void deactivate() {
+        this.status = MemberStatus.DEACTIVATED;
     }
 }

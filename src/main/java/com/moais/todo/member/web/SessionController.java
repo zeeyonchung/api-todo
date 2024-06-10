@@ -24,7 +24,7 @@ public class SessionController {
 
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
-        session.setAttribute("memberId", id);
+        session.setAttribute("id", id);
         session.setMaxInactiveInterval(SESSION_EXPIRE_SECONDS);
 
         return ResponseEntity.ok(new LoginRes(id));
