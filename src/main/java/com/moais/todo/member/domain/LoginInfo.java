@@ -1,7 +1,7 @@
 package com.moais.todo.member.domain;
 
-import com.moais.todo.error.CustomException;
-import com.moais.todo.error.ErrorCode;
+import com.moais.todo.common.error.CustomException;
+import com.moais.todo.common.error.ErrorCode;
 import com.moais.todo.member.util.PasswordEncoder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

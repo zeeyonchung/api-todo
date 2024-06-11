@@ -1,8 +1,8 @@
 package com.moais.todo.member.domain;
 
-import com.moais.todo.BaseTimeEntity;
-import com.moais.todo.error.CustomException;
-import com.moais.todo.error.ErrorCode;
+import com.moais.todo.common.BaseTimeEntity;
+import com.moais.todo.common.error.CustomException;
+import com.moais.todo.common.error.ErrorCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

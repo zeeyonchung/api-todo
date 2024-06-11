@@ -1,4 +1,4 @@
-package com.moais.todo.error;
+package com.moais.todo.common.error;
 
 import lombok.Getter;
 

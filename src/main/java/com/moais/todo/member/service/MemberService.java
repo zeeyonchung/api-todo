@@ -1,7 +1,7 @@
 package com.moais.todo.member.service;
 
-import com.moais.todo.error.CustomException;
-import com.moais.todo.error.ErrorCode;
+import com.moais.todo.common.error.CustomException;
+import com.moais.todo.common.error.ErrorCode;
 import com.moais.todo.member.domain.LoginInfo;
 import com.moais.todo.member.domain.Member;
 import com.moais.todo.member.repo.MemberRepository;

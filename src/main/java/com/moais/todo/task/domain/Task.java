@@ -1,6 +1,6 @@
 package com.moais.todo.task.domain;
 
-import com.moais.todo.BaseTimeEntity;
+import com.moais.todo.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.moais.todo;
+package com.moais.todo.common;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
