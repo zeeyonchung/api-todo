@@ -2,6 +2,7 @@ package com.moais.todo.task.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moais.todo.common.web.SuccessResponse;
+import com.moais.todo.task.domain.TaskStatus;
 import com.moais.todo.task.service.dto.TaskListRes;
 import com.moais.todo.task.service.dto.TaskRes;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class GetTaskListRes extends SuccessResponse<GetTaskListRes.Data> {
     private static class GetTaskRes {
         private final Long id;
         private final String content;
+        private final TaskStatus status;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
         private final LocalDateTime createdAt;
@@ -39,6 +41,7 @@ public class GetTaskListRes extends SuccessResponse<GetTaskListRes.Data> {
             this.id = task.getId();
             this.content = task.getContent();
             this.createdAt = task.getCreatedAt();
+            this.status = task.getStatus();
         }
     }
 }
