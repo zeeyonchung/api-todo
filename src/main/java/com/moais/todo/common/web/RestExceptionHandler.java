@@ -1,5 +1,7 @@
-package com.moais.todo.common.error;
+package com.moais.todo.common.web;
 
+import com.moais.todo.common.error.CustomException;
+import com.moais.todo.common.error.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -28,7 +30,6 @@ public class RestExceptionHandler {
     }
 
     private ResponseEntity<ErrorResponse> createResponse(Exception e, ErrorCode errorCode) {
-        ErrorResponse errorResponse = ErrorResponse.of(e, errorCode.getCode());
-        return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
+        return new ResponseEntity<>(new ErrorResponse(e, errorCode.getCode()), errorCode.getHttpStatus());
     }
 }

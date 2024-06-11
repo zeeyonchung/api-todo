@@ -1,4 +1,13 @@
 package com.moais.todo.task.web.dto;
 
-public record CreateTaskRes(Long id) {
+import com.moais.todo.common.web.SuccessResponse;
+import lombok.Getter;
+
+@Getter
+public class CreateTaskRes extends SuccessResponse<CreateTaskRes.Data> {
+    public CreateTaskRes(Long id) {
+        super(new Data(id));
+    }
+
+    record Data(Long id) {}
 }
