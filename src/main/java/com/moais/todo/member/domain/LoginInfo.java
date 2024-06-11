@@ -14,22 +14,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginInfo {
     @Column(unique = true)
-    private String memberId;
+    private String loginId;
     private String encodedPassword;
 
-    private LoginInfo(String memberId, String encodedPassword) {
-        this.memberId = memberId;
+    private LoginInfo(String loginId, String encodedPassword) {
+        this.loginId = loginId;
         this.encodedPassword = encodedPassword;
     }
 
-    public static LoginInfo of(String memberId, String rawPassword) {
-        return new LoginInfo(memberId, PasswordEncoder.encode(rawPassword));
+    public static LoginInfo of(String loginId, String rawPassword) {
+        return new LoginInfo(loginId, PasswordEncoder.encode(rawPassword));
     }
 
     public void login(LoginInfo loginInfo) {
-        if (!this.memberId.equals(loginInfo.getMemberId())
+        if (!this.loginId.equals(loginInfo.getLoginId())
                 || !this.encodedPassword.equals(loginInfo.getEncodedPassword())) {
-            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginInfo.getMemberId());
+            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginInfo.getLoginId());
         }
     }
 }

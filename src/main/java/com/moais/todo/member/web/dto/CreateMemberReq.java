@@ -6,11 +6,11 @@ import lombok.Getter;
 
 @Getter
 public class CreateMemberReq {
-    private String memberId;
+    private String loginId;
     private String password;
     private String nickname;
 
     public Member toMember() {
-        return new Member(LoginInfo.of(memberId, password), nickname);
+        return new Member(LoginInfo.of(loginId, password), nickname);
     }
 }

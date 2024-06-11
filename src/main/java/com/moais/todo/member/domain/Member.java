@@ -31,7 +31,7 @@ public class Member {
 
     public void login(LoginInfo loginInfo) {
         if (this.status != MemberStatus.ACTIVATED) {
-            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginInfo.getMemberId());
+            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginInfo.getLoginId());
         }
 
         this.loginInfo.login(loginInfo);

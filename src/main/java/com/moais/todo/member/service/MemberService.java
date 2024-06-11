@@ -26,21 +26,21 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        String memberId = member.getLoginInfo().getMemberId();
+        String loginId = member.getLoginInfo().getLoginId();
         Optional<Member> foundMember = memberRepository
-                .findByLoginInfo_MemberId(memberId);
+                .findByLoginInfo_LoginId(loginId);
 
         if (foundMember.isPresent()) {
-            throw new CustomException(ErrorCode.JOIN_EXISTING_MEMBER, memberId);
+            throw new CustomException(ErrorCode.JOIN_EXISTING_MEMBER, loginId);
         }
     }
 
     public Long login(LoginInfo loginInfo) {
-        String memberId = loginInfo.getMemberId();
-        Optional<Member> foundMember = memberRepository.findByLoginInfo_MemberId(memberId);
+        String loginId = loginInfo.getLoginId();
+        Optional<Member> foundMember = memberRepository.findByLoginInfo_LoginId(loginId);
 
         if (foundMember.isEmpty()) {
-            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, memberId);
+            throw new CustomException(ErrorCode.LOGIN_WRONG_ARGUMENT, loginId);
         }
 
         Member member = foundMember.get();

@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 public class LoginReq {
-    private String memberId;
+    private String loginId;
     private String password;
 
     public LoginInfo toLoginInfo() {
-        return LoginInfo.of(memberId, password);
+        return LoginInfo.of(loginId, password);
     }
 }
