@@ -2,14 +2,16 @@ package com.moais.todo.task.web;
 
 import com.moais.todo.task.domain.Task;
 import com.moais.todo.task.service.TaskService;
+import com.moais.todo.task.service.dto.TaskListRes;
 import com.moais.todo.task.web.dto.CreateTaskReq;
 import com.moais.todo.task.web.dto.CreateTaskRes;
+import com.moais.todo.task.web.dto.GetTaskListRes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +26,13 @@ public class TaskController {
         Task task = req.toTask(memberId);
         taskService.add(task);
         return ResponseEntity.ok(new CreateTaskRes(task.getId()));
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<GetTaskListRes> read(
+            @SessionAttribute(name = "id") Long memberId,
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        TaskListRes tasks = taskService.find(memberId, pageable);
+        return ResponseEntity.ok(new GetTaskListRes(tasks));
     }
 }
