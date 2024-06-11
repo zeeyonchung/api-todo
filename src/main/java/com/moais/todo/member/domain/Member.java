@@ -1,5 +1,6 @@
 package com.moais.todo.member.domain;
 
+import com.moais.todo.BaseTimeEntity;
 import com.moais.todo.error.CustomException;
 import com.moais.todo.error.ErrorCode;
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
