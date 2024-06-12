@@ -1,6 +1,8 @@
 package com.moais.todo.task.domain;
 
 import com.moais.todo.common.BaseTimeEntity;
+import com.moais.todo.common.error.CustomException;
+import com.moais.todo.common.error.ErrorCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,5 +28,14 @@ public class Task extends BaseTimeEntity {
         this.content = content;
         this.status = TaskStatus.TODO;
         this.memberId = memberId;
+    }
+
+    public void changeStatusTo(TaskStatus toStatus) {
+        if (!this.status.canChangeTo(toStatus)) {
+            throw new CustomException(ErrorCode.BAD_REQUEST,
+                    String.format("Not allowed to change status %s to %s.", this.status, toStatus));
+        }
+
+        this.status = toStatus;
     }
 }

@@ -9,7 +9,8 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR("M1001", "An exception occurred.", HttpStatus.INTERNAL_SERVER_ERROR),
     JOIN_EXISTING_MEMBER("J1001", "The loginId already exists.", HttpStatus.BAD_REQUEST),
     LOGIN_WRONG_ARGUMENT("L1001", "Wrong loginId or wrong password.", HttpStatus.BAD_REQUEST),
-    LOGIN_UNAUTHORIZED("L1002", "Unauthorized.", HttpStatus.UNAUTHORIZED);
+    LOGIN_UNAUTHORIZED("L1002", "Unauthorized.", HttpStatus.UNAUTHORIZED),
+    LOGIN_FORBIDDEN("L1003", "Forbidden request.", HttpStatus.FORBIDDEN);
 
     private final String code;
     private final String message;

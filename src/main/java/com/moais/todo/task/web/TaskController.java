@@ -1,11 +1,13 @@
 package com.moais.todo.task.web;
 
+import com.moais.todo.common.web.EmptyResponse;
 import com.moais.todo.task.domain.Task;
 import com.moais.todo.task.service.TaskService;
 import com.moais.todo.task.service.dto.TaskListRes;
 import com.moais.todo.task.web.dto.CreateTaskReq;
 import com.moais.todo.task.web.dto.CreateTaskRes;
 import com.moais.todo.task.web.dto.GetTaskListRes;
+import com.moais.todo.task.web.dto.UpdateTaskReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -34,5 +36,14 @@ public class TaskController {
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         TaskListRes tasks = taskService.find(memberId, pageable);
         return ResponseEntity.ok(new GetTaskListRes(tasks));
+    }
+
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<EmptyResponse> update(
+            @RequestBody UpdateTaskReq req,
+            @PathVariable(name = "id") Long taskId,
+            @SessionAttribute(name = "id") Long memberId) {
+        taskService.changeStatus(taskId, memberId, req.getToStatus());
+        return ResponseEntity.ok(EmptyResponse.getInstance());
     }
 }
