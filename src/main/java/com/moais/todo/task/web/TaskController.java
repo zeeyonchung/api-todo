@@ -8,6 +8,7 @@ import com.moais.todo.task.web.dto.CreateTaskReq;
 import com.moais.todo.task.web.dto.CreateTaskRes;
 import com.moais.todo.task.web.dto.GetTaskListRes;
 import com.moais.todo.task.web.dto.UpdateTaskReq;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,7 +24,7 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public ResponseEntity<CreateTaskRes> create(
-            @RequestBody CreateTaskReq req,
+            @RequestBody @Valid CreateTaskReq req,
             @SessionAttribute(name = "id") Long memberId) {
         Task task = req.toTask(memberId);
         taskService.add(task);
@@ -40,7 +41,7 @@ public class TaskController {
 
     @PatchMapping("/tasks/{id}")
     public ResponseEntity<EmptyResponse> update(
-            @RequestBody UpdateTaskReq req,
+            @RequestBody @Valid UpdateTaskReq req,
             @PathVariable(name = "id") Long taskId,
             @SessionAttribute(name = "id") Long memberId) {
         taskService.changeStatus(taskId, memberId, req.getToStatus());

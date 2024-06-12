@@ -5,6 +5,7 @@ import com.moais.todo.member.web.dto.LoginReq;
 import com.moais.todo.member.web.dto.LoginRes;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class SessionController {
     private final MemberService memberService;
 
     @PostMapping("/sessions")
-    public ResponseEntity<LoginRes> login(@RequestBody LoginReq req, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<LoginRes> login(@RequestBody @Valid LoginReq req, HttpServletRequest httpServletRequest) {
         Long id = memberService.login(req.toLoginInfo());
 
         httpServletRequest.getSession().invalidate();

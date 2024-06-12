@@ -5,6 +5,7 @@ import com.moais.todo.member.service.MemberService;
 import com.moais.todo.member.web.dto.CreateMemberReq;
 import com.moais.todo.member.web.dto.CreateMemberRes;
 import com.moais.todo.common.web.EmptyResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
-    public ResponseEntity<CreateMemberRes> create(@RequestBody CreateMemberReq req) {
+    public ResponseEntity<CreateMemberRes> create(@RequestBody @Valid CreateMemberReq req) {
         Member member = req.toMember();
         Long id = memberService.join(member);
         return ResponseEntity.ok(new CreateMemberRes(id));

@@ -6,8 +6,8 @@ import lombok.Getter;
 public class ErrorResponse extends Response<ErrorResponse.Data> {
     private static final String STATUS = "error";
 
-    public ErrorResponse(Exception e, String code) {
-        super(STATUS, e.getLocalizedMessage(), new Data(code));
+    public ErrorResponse(String message, String code) {
+        super(STATUS, message, new Data(code));
     }
 
     record Data(String code) {}

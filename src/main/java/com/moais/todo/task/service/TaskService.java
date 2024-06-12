@@ -31,7 +31,8 @@ public class TaskService {
 
     @Transactional
     public void changeStatus(Long taskId, Long memberId, TaskStatus status) {
-        Task task = taskRepository.findById(taskId).orElseThrow();
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new CustomException(ErrorCode.BAD_REQUEST, taskId.toString()));
 
         if (!task.getMemberId().equals(memberId)) {
             throw new CustomException(ErrorCode.LOGIN_FORBIDDEN, memberId.toString());
